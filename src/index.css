@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply bg-softBg text-darkText font-sans;
+}
+
+/* Glass Card Utility */
+.glass-card {
+  @apply bg-white/60 backdrop-blur-lg rounded-xl2 shadow-glass;
+}
+
+/* Primary Button */
+.btn-primary {
+  @apply bg-primary text-white px-5 py-2 rounded-xl2 transition-all duration-300 hover:bg-darkPink shadow-soft;
+}
