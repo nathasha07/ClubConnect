@@ -2,11 +2,11 @@
   <img src="./img.png" alt="Project Banner" width="100%">
 </p>
 
-# [Project Name] 🎯
+# CampusClub🎯
 
 ## Basic Details
 
-### Team Name: NS CHaos
+### Team Name: NS Chaos
 
 ### Team Members
 - Member 1: Nathasha Vipin - College of Engineering Thalassery
