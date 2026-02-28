@@ -3,7 +3,7 @@ import axios from "axios";
 // In development, use /api (proxied by Vite)
 // In production, use full URL from env
 const API_URL = import.meta.env.PROD 
-  ? import.meta.env.VITE_API_URL || "https://api.example.com/api"
+  ? import.meta.env.VITE_API_URL || "https://api.example.com"
   : "/api";
 
 const API = axios.create({
