@@ -17,7 +17,10 @@ const app = express();
 // Middlewares
 // ==========================
 app.use(cors({
-  origin: process.env.CLIENT_URL || "http://localhost:5173",
+  origin: [
+    "http://localhost:5173",
+    "https://club-connect-3844-git-main-nathasha07s-projects.vercel.app"
+  ],
   credentials: true
 }));
 app.use(express.json());
