@@ -17,12 +17,12 @@ const app = express();
 // Middlewares
 // ==========================
 app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://club-connect-3844-git-main-nathasha07s-projects.vercel.app"
-  ],
-  credentials: true
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
+app.options("*", cors());
 app.use(express.json());
 
 // ==========================
