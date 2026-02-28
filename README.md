@@ -199,11 +199,11 @@ After running the application, you can log in with these credentials:
 #### Diagrams
 
 **System Architecture:**
-![System Architecture](systemarch.png)
+![System Architecture](SystemArch.png)
 *System architecture showing the layered design with React frontend, Express backend, JWT authentication, role-based middleware, multiple controllers, and MongoDB database interaction flow.*
 
 **Application Workflow:**
-![Application Workflow](appworkflow.png)
+![Application Workflow](AppWorkflow.png)
 *Application workflow diagram illustrating the complete user journey for Admin, Coordinator, and Student roles with their respective tasks and interactions within the system.*
 
 ---
