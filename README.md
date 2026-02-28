@@ -153,7 +153,7 @@ After running the application, you can log in with these credentials:
 #### Screenshots
 
 **Home Page**
-[Home Page](Home.png)
+![Home Page](Home.png)
 
 **Admin Dashboard**
 ![Admin Dashboard](screenshots/AdminDashboard.png)
