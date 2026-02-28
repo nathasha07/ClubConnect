@@ -27,12 +27,28 @@ const Login = () => {
     try {
       const res = await API.post("/auth/login", form);
 
+      // Save token
       localStorage.setItem("token", res.data.token);
+
+      // Save role
+      localStorage.setItem("role", res.data.user.role);
+
+      // Save full user in context
       setUser(res.data.user);
 
       toast.success("Login successful");
-      navigate("/dashboard");
+
+      // 🔥 Role-based redirect
+      if (res.data.user.role === "Admin") {
+        navigate("/dashboard/admin/clubs");
+      } else if (res.data.user.role === "Coordinator") {
+        navigate("/dashboard/events/create");
+      } else {
+        navigate("/dashboard/events");
+      }
+
     } catch (error) {
+      console.error("Login error:", error);
       toast.error(error.response?.data?.message || "Login failed");
     } finally {
       setLoading(false);
@@ -65,6 +81,22 @@ const Login = () => {
         <button type="submit" disabled={loading} className="btn-primary mt-2">
           {loading ? "Logging in..." : "Login"}
         </button>
+
+        {/* Test Credentials Info */}
+        <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+          <p className="text-sm font-medium text-blue-900 mb-3">📝 Test Credentials:</p>
+          <div className="space-y-2 text-sm text-blue-800">
+            <div>
+              <strong>Admin:</strong> admin@test.com / password123
+            </div>
+            <div>
+              <strong>Coordinator:</strong> coordinator@test.com / password123
+            </div>
+            <div>
+              <strong>Student:</strong> student@test.com / password123
+            </div>
+          </div>
+        </div>
       </form>
     </AuthLayout>
   );

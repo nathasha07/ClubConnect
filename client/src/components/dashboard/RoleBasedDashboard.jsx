@@ -7,11 +7,11 @@ import AdminDashboard from "../../pages/admin/AdminDashboard";
 const RoleBasedDashboard = () => {
   const { user } = useContext(AuthContext);
 
-  if (user?.role === "admin") {
+  if (user?.role === "Admin") {
     return <AdminDashboard />;
   }
 
-  if (user?.role === "coordinator") {
+  if (user?.role === "Coordinator") {
     return <CoordinatorDashboard />;
   }
 

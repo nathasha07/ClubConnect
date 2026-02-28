@@ -13,10 +13,24 @@ const eventSchema = new mongoose.Schema({
   venue: String,
   category: String,
   maxParticipants: Number,
+  club: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Club"
+  },
   createdBy: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
-  }
+  },
+  approvalStatus: {
+    type: String,
+    enum: ["Pending", "Approved", "Rejected"],
+    default: "Pending"
+  },
+  approvedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  },
+  approvalComment: String
 }, { timestamps: true });
 
 const Event = mongoose.model("Event", eventSchema);

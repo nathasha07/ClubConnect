@@ -1,0 +1,11 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Start Backend Server",
+			"type": "shell",
+			"command": "cd \"C:\\Users\\cvbnd\\OneDrive\\Desktop\\clubmanagement1\\smart-campus\\ClubConnect\\server\" && npm start",
+			"isBackground": true
+		}
+	]
+}

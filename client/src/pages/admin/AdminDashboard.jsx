@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import StatCard from "../../components/dashboard/StatCard";
+import API from "../../services/api";
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState({
@@ -10,14 +11,24 @@ const AdminDashboard = () => {
   });
 
   useEffect(() => {
-    // Mock system-wide metrics
-    setStats({
-      totalClubs: 12,
-      totalEvents: 48,
-      totalStudents: 860,
-      totalCertificates: 520,
-    });
-  }, []);
+  const fetchDashboard = async () => {
+    try {
+      const res = await API.get("/admin/dashboard");
+
+      setStats({
+        totalClubs: 0, // we haven't created clubs model yet
+        totalEvents: res.data.totalEvents,
+        totalStudents: res.data.totalStudents,
+        totalCertificates: 0, // later feature
+      });
+
+    } catch (error) {
+      console.error("Error fetching dashboard:", error);
+    }
+  };
+
+  fetchDashboard();
+}, []);
 
   return (
     <div>

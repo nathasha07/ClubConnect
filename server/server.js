@@ -6,7 +6,8 @@ import dotenv from "dotenv";
 import authRoutes from "./routes/authRoutes.js";
 import eventRoutes from "./routes/eventRoutes.js";
 import registrationRoutes from "./routes/registrationRoutes.js";
-import adminRoutes from "./routes/adminRoutes.js";   // ✅ ADD THIS
+import adminRoutes from "./routes/adminRoutes.js";
+import clubRoutes from "./routes/clubRoutes.js";
 
 dotenv.config();
 
@@ -15,7 +16,10 @@ const app = express();
 // ==========================
 // Middlewares
 // ==========================
-app.use(cors());
+app.use(cors({
+  origin: process.env.CLIENT_URL || "http://localhost:5173",
+  credentials: true
+}));
 app.use(express.json());
 
 // ==========================
@@ -24,7 +28,8 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/events", eventRoutes);
 app.use("/api/registrations", registrationRoutes);
-app.use("/api/admin", adminRoutes);   // ✅ ADD THIS
+app.use("/api/admin", adminRoutes);
+app.use("/api/clubs", clubRoutes);
 
 // Health Check Route
 app.get("/", (req, res) => {
@@ -49,14 +54,28 @@ app.use((err, req, res, next) => {
 // ==========================
 const PORT = process.env.PORT || 5000;
 
-mongoose.connect(process.env.MONGO_URI)
+console.log("Starting server...");
+console.log("MONGO_URI:", process.env.MONGO_URI ? "✓ Configured" : "✗ Missing");
+console.log("JWT_SECRET:", process.env.JWT_SECRET ? "✓ Configured" : "✗ Missing");
+
+// Start server first, attempt DB connection separately
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT} 🚀`);
+});
+
+mongoose.connect(process.env.MONGO_URI, {
+  serverSelectionTimeoutMS: 5000,
+  connectTimeoutMS: 10000,
+})
   .then(() => {
     console.log("MongoDB Connected ✅");
-
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT} 🚀`);
-    });
   })
   .catch((err) => {
-    console.error("MongoDB Connection Failed ❌", err);
+    console.error("MongoDB Connection Failed ❌");
+    console.error("Error:", err.message);
+    console.error("\n⚠️  IP WHITELIST ERROR?");
+    console.error("If you're getting 'not whitelisted' error, go to:");
+    console.error("https://www.mongodb.com/docs/atlas/security-whitelist/");
+    console.error("Add your current IP or 0.0.0.0/0 (all IPs) to the whitelist");
+    console.error("\nServer is still running on port", PORT);
   });

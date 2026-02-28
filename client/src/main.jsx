@@ -4,13 +4,9 @@ import App from "./App";
 import "./index.css";
 import { Toaster } from "react-hot-toast";
 
-<React.StrictMode>
-  <App />
-  <Toaster position="top-right" />
-</React.StrictMode>;
-
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <App />
+    <Toaster position="top-right" />
   </React.StrictMode>,
 );

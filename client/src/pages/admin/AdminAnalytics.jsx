@@ -12,32 +12,58 @@ import {
   BarChart,
   Bar,
 } from "recharts";
+import { useEffect, useState } from "react";
 
 import Card from "../../components/ui/Card";
+import API from "../../services/api";
 
 const AdminAnalytics = () => {
-  const monthlyData = [
-    { month: "Jan", registrations: 120 },
-    { month: "Feb", registrations: 210 },
-    { month: "Mar", registrations: 180 },
-    { month: "Apr", registrations: 250 },
-  ];
+  const [monthlyData, setMonthlyData] = useState([]);
+  const [clubDistribution, setClubDistribution] = useState([]);
+  const [certificateTrend, setCertificateTrend] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const clubDistribution = [
-    { name: "Coding", value: 40 },
-    { name: "Robotics", value: 25 },
-    { name: "Design", value: 20 },
-    { name: "Other", value: 15 },
-  ];
+  useEffect(() => {
+    const fetchAnalytics = async () => {
+      try {
+        // TODO: Create /admin/analytics endpoint to return chart data
+        // For now, using mock data
+        setMonthlyData([
+          { month: "Jan", registrations: 120 },
+          { month: "Feb", registrations: 210 },
+          { month: "Mar", registrations: 180 },
+          { month: "Apr", registrations: 250 },
+        ]);
 
-  const certificateTrend = [
-    { month: "Jan", certificates: 60 },
-    { month: "Feb", certificates: 110 },
-    { month: "Mar", certificates: 95 },
-    { month: "Apr", certificates: 150 },
-  ];
+        setClubDistribution([
+          { name: "Coding", value: 40 },
+          { name: "Robotics", value: 25 },
+          { name: "Design", value: 20 },
+          { name: "Other", value: 15 },
+        ]);
+
+        setCertificateTrend([
+          { month: "Jan", certificates: 60 },
+          { month: "Feb", certificates: 110 },
+          { month: "Mar", certificates: 95 },
+          { month: "Apr", certificates: 150 },
+        ]);
+
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching analytics:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchAnalytics();
+  }, []);
 
   const COLORS = ["#E91E63", "#AD1457", "#F8BBD0", "#FF80AB"];
+
+  if (loading) {
+    return <div className="text-center py-8">Loading analytics...</div>;
+  }
 
   return (
     <div>

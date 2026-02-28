@@ -32,14 +32,19 @@ export const registerForEvent = async (req, res) => {
       });
     }
 
+    // Auto-approve registration (no coordinator approval needed)
     const registration = await Registration.create({
       student: req.user._id,
-      event: eventId
+      event: eventId,
+      status: "Approved"  // Auto-approve for students
     });
+
+    // Populate event details in response
+    const populatedReg = await Registration.findById(registration._id).populate("event", "title date venue _id");
 
     res.status(201).json({
       message: "Registration successful",
-      data: registration
+      data: populatedReg
     });
 
   } catch (error) {
@@ -227,13 +232,10 @@ export const getMyRegistrations = async (req, res) => {
     const registrations = await Registration.find({
       student: req.user._id
     })
-      .populate("event", "title date venue")
+      .populate("event", "title date venue _id")
       .sort({ createdAt: -1 });
 
-    res.json({
-      count: registrations.length,
-      data: registrations
-    });
+    res.json(registrations);
 
   } catch (error) {
     res.status(500).json({

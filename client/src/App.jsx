@@ -17,8 +17,9 @@ import CreateEvent from "./pages/coordinator/CreateEvent.jsx";
 import EventRegistrations from "./pages/coordinator/EventRegistrations.jsx";
 import DutyLeaveManagement from "./pages/coordinator/DutyLeaveManagement.jsx";
 
-import ApproveClubs from "./pages/admin/ApproveClubs.jsx";
-import ApproveCoordinators from "./pages/admin/ApproveCoordinators.jsx";
+import CreateClub from "./pages/admin/CreateClub.jsx";
+import ViewClubs from "./pages/admin/ViewClubs.jsx";
+import ApproveEvents from "./pages/admin/ApproveEvents.jsx";
 import AdminAnalytics from "./pages/admin/AdminAnalytics.jsx";
 
 import Home from "./pages/Home.jsx";
@@ -39,11 +40,9 @@ function App() {
             }
           >
             <Route index element={<RoleBasedDashboard />} />
-            <Route path="admin/clubs" element={<ApproveClubs />} />
-            <Route
-              path="admin/coordinators"
-              element={<ApproveCoordinators />}
-            />
+            <Route path="admin/clubs/create" element={<CreateClub />} />
+            <Route path="admin/clubs" element={<ViewClubs />} />
+            <Route path="admin/events/approve" element={<ApproveEvents />} />
             <Route path="admin/analytics" element={<AdminAnalytics />} />
             <Route path="events/create" element={<CreateEvent />} />
             <Route
