@@ -152,6 +152,9 @@ After running the application, you can log in with these credentials:
 
 #### Screenshots
 
+**Home Page**
+[Home Page](Home.png)
+
 **Admin Dashboard**
 ![Admin Dashboard](screenshots/AdminDashboard.png)
 *Admin dashboard showing overview of clubs, events, and system statistics. Displays real-time metrics for campus club activities and pending approvals.*
