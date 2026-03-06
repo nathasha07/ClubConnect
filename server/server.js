@@ -19,7 +19,7 @@ const app = express();
 app.use(cors({
   origin: [
     //"http://localhost:5173",
-    "https://club-connect-3844-git-main-nathasha07s-projects.vercel.app"
+    process.env.CLIENT_URL || "https://club-connect-3844-git-main-nathasha07s-projects.vercel.app"
   ],
   credentials: true
 }));
